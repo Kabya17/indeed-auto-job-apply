@@ -11,13 +11,16 @@ from helpers.numbers import formatted_number_with_comma, numbers_within_str, str
 
 def search():
     job_keyword, job_location = keyword['job_keyword'], keyword['job_location']
-    d.sleep(1, 3)
+    # d.sleep(1, 3)
     d.element_send_keys(job_keyword, '#text-input-what')
-    d.sleep(0.3, 1.0)
-    
+
+    if job_location:
+        d.element_send_keys(job_location, '#text-input-where')
+
     # Search job button
+    d.sleep(0.3, 1.0)
     d.element_click('.yosegi-InlineWhatWhere-primaryButton')
-    time.sleep(2)
+
 
 def get_ans(q, type):
     
@@ -91,7 +94,7 @@ def loop_questions(questions_div):
         else:
             handle_question(type='unknown', q_div=q)
         
-def job_apply():
+def apply_on_current_job():
 
     phone_number = keyword['phone_number']
     d.switch_to_tab(1)
@@ -134,24 +137,28 @@ def job_apply():
         return True
     return False
 
-def apply_job():
+def apply_job(email, password, title, location, no_of_job):
     global keyword, q_ans, d
-    keyword = read_txt_in_dict('inputs/keyword.txt', '=')
+    keyword = {'job_keyword': title, 'job_location': location, 'phone_number' : '3143129164'}
+    no_of_job = int(no_of_job)
+
     q_ans = read_csv('inputs/q_ans.csv')
 
     url = 'https://www.indeed.com'
     d = Scraper(url, exit_on_missing_element=False, profile="indeed")
-    d.print_executable_path()
+    # d.print_executable_path()
     
     d.go_to_page(url)
     d.add_login_functionality('#AccountMenu')
+    print('Logged in')
     
-    search()
+    if title:
+        search()
     
     #job results
     count = 0
-    while True:
-        d.sleep(3, 7, True)
+    while count <= no_of_job:
+        d.sleep(3, 4)
         jobs = d.find_elements('a[id^="job_"]')
         print('\nLen of jobs: ', len(jobs))
         for job in jobs:
@@ -162,7 +169,7 @@ def apply_job():
             apply_btn = d.find_element('#indeedApplyButton', exit_on_missing_element=False, wait_element_time=0.1)
             if apply_btn:
                 d.element_click(element=apply_btn)
-                success = job_apply()
+                success = apply_on_current_job()
                 if success:
                     count += 1
                     data_countdown(f'{count} job applied')
@@ -172,10 +179,10 @@ def apply_job():
                 d.driver.switch_to.default_content()
 
         # Go to next page
-        if d.element_click('a[aria-label="Next"]') == None:
+        if d.element_click('a[aria-label="Next Page"]') == None:
             break
     
     d.driver.quit()
 
 
-apply_job()
+# apply_job()

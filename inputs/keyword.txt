@@ -1,3 +1,0 @@
-job_keyword = python developer
-job_location = remote
-phone_number = 3143129164

@@ -1,8 +1,27 @@
 from tkinter import *
-from tkinter import ttk
 from apply_job import apply_job
+import re
+
+
+def start_apply():
+
+    # print(job_title.get(), no_of_job.get(), location.get(), email.get(), password.get())
+
+    email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+    if not re.fullmatch(email_regex, email.get()):
+        msg_entry['text'] = "Email is invalid"
+
+    else:
+        msg_entry['text'] = "Applying Job..."
+        msg_entry.pack()
+        
+        apply_job(email.get(), password.get(), job_title.get(), location.get(), no_of_job.get())
+        
+        msg_entry['text'] = "Apply Job Completed"
+        msg_entry.pack()
 
 def main():
+    global job_title, no_of_job, location, email, password, msg_entry
     #Create an instance of Tkinter frame
     win= Tk()
 
@@ -10,18 +29,6 @@ def main():
     win.title("Indeed Auto Job Apply")
     win.geometry("750x500")
 
-    def start_apply():
-        global job_title, no_of_job, location, email, password, msg_entry
-    
-        print(job_title.get(), no_of_job.get(), location.get(), email.get(), password.get())
-
-        msg_entry['text'] = "Applying Job..."
-        msg_entry.pack()
-        
-        apply_job()
-        
-        msg_entry['text'] = "Apply Job Completed"
-        msg_entry.pack()
 
         
     #Initialize a Label to display the User Input

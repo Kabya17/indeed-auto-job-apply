@@ -33,3 +33,18 @@ radio,Years of experience working for a State Farm agent?,1-2
 radio,"Will you be able to reliably commute or relocate to Philadelphia, MS 39350 for this job?",yes
 text,How many years of REST experience do you have?,3
 text,How many years of APIs experience do you have?,3
+radio,"Do you consent to receiving text communications related to your job application via SMS from Trinity Solar Careers, which may include autodialed and automated messages, at the mobile number provided? Message frequency may vary and applicable data rates may apply.",no
+textarea,"This is an employer-written question. You can report inappropriate questions to Indeed through the ""Report Job"" link at the bottom of the job description.
+
+""Are you 21 or older?""(optional)",21
+textarea,"This is an employer-written question. You can report inappropriate questions to Indeed through the ""Report Job"" link at the bottom of the job description.
+
+""What is your phone number?""(optional)",07654433222
+textarea,"This is an employer-written question. You can report inappropriate questions to Indeed through the ""Report Job"" link at the bottom of the job description.
+
+""What is your email address?""(optional)",email@email.com
+text,"How many years of Mobile or Web Framework (e.g., Flutter, Angular, React) experience do you have?",3
+textarea,"This is an employer-written question. You can report inappropriate questions to Indeed through the ""Report Job"" link at the bottom of the job description.
+
+""Are you at least 21 years of age or older?""(optional)",yes
+radio,Do you have a valid Driver's License?,yes
